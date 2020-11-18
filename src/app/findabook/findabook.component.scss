@@ -1,0 +1,26 @@
+.search {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 30px 20px;
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+  input {
+    flex-grow: 1;
+    padding: 10px 20px;
+    border: 0;
+    font-size: 1rem;
+    font-weight: 300;
+
+    &::placeholder {
+      color: rgb(180,180,180);
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border: 0;
+    padding: 10px 20px;
+  }
+}

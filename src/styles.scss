@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Source Serif Pro', serif;
+}
+
+html {
+  background-image: url(./assets/images/openbook.jpeg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: rgb(240,240,240);
+  min-height: 90vh;
+}
+
+h1 {
+  font-weight: 300;
+}
+
+p {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: rgb(100,100,100);
+}
