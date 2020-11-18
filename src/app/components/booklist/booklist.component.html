@@ -5,9 +5,11 @@
   <div class="books">
     <article *ngFor="let book of books" class="book">
       <img src={{book.volumeInfo.imageLinks.smallThumbnail}} alt="book.volumeInfo.title">
-      <p>{{book.volumeInfo.authors[0] | slice:0:50}}</p>
-      <h3>{{book.volumeInfo.title | slice:0:50}}</h3>
-      <button class="btn btn-secondary" (click)="handleSave(book)">Save</button>
+      <div class="book__details">
+        <p>{{book.volumeInfo.authors[0] | slice:0:50}}</p>
+        <h3>{{book.volumeInfo.title | slice:0:50}}</h3>
+        <button class="btn btn-secondary" (click)="handleSave(book)">Save</button>
+      </div>
     </article>
   </div>
 

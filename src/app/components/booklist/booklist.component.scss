@@ -18,21 +18,28 @@
 }
 
 .book {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 200px;
+  gap: 10px;
+  align-items: flex-start;
+  width: 100vw;
   
   img {
+    // position: absolute;
     border-radius: 10px;
+
   }
-  
-  h3 {
-    font-weight: 400;
-    padding: 5px;
-  }
-  
-  p {
-    padding: 5px;
+
+  .bookdetails {
+
+    h3 {
+      font-weight: 400;
+      padding: 5px;
+    }
+    
+    p {
+      padding: 5px;
+    }
   }
 }

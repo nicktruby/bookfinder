@@ -4,15 +4,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 //Components
 import { AppComponent } from './app.component';
-import { FindabookComponent } from './findabook/findabook.component';
-import { BooklistComponent } from './findabook/booklist/booklist.component';
-import { BookshelfComponent } from './bookshelf/bookshelf.component';
-import { NavComponent } from './nav/nav.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { NavComponent } from './components/nav/nav.component';
+import { BooklistComponent } from './components/booklist/booklist.component';
+// Pages
+import { FindabookComponent } from './pages/findabook/findabook.component';
+import { BookshelfComponent } from './pages/bookshelf/bookshelf.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -38,6 +37,7 @@ const firebaseConfig = {
     PageNotFoundComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     RouterModule.forRoot([
       {path: 'findabook', component: FindabookComponent},
@@ -47,7 +47,6 @@ const firebaseConfig = {
     ]),
     FormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
   ],
