@@ -34,8 +34,8 @@ export class FindabookComponent implements OnInit {
     });
   }
 
-  handleSave() {
-    // This is an example of how to add a document to a collection in firestore
-    // this.firestore.doc(`collection/${book.id}`).set(book, { merge: true });
+  handleSave(book) {
+    // this.firestore.doc(`bookshelf/${book.id}`).set(book, { merge: true });
+    this.firestore.collection("bookshelf").doc(`bookshelf/${book.id}`).set(book, {merge:true})
   }
 }

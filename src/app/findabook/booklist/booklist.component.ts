@@ -9,7 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BooklistComponent implements OnInit {
   
   @Input() books: object[];
-
+  @Input() handleSave: VoidFunction;
+  
   constructor() { }
 
   ngOnInit(): void {
