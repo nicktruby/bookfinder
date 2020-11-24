@@ -1,6 +1,7 @@
 <section class="booklist">
-  <ng-content></ng-content>
-
+  <header class="header">
+    <ng-content></ng-content>
+  </header>
   <div class="books">
     <article *ngFor="let book of books" class="book">
       <img src={{book.volumeInfo.imageLinks.smallThumbnail}} alt="book.volumeInfo.title">

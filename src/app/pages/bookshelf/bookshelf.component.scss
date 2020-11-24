@@ -1,3 +1,25 @@
+.filter {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 30px 20px;
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+  select {
+    flex-grow: 1;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 300;
+
+    option:nth-of-type(1) {
+      color: rgb(180,180,180);
+    }
+  }
+}
+
 .bookshelf {
   background: white;
   border-radius: 15px 0 0 15px;

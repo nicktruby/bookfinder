@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-// Note: Angularfire wasn't injecting firestore (it's undefined?) so I've reverted to using firebase library;
-// import * as firebase from 'firebase'
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-bookshelf',
@@ -10,15 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookshelfComponent implements OnInit {
 
-  books : object[];
+  books : any;
+  authorArr : any[];
+  filterText: string;
+  filteredBooks : any;
 
-  constructor() { }
+  constructor(private db : AngularFirestore) { }
 
   ngOnInit(): void {
-    // const firestore = firebase.default.firestore();
-    // console.log(this.books)
-    // firestore.collection("bookshelf").get().then(response => {
-    //   const data = response.docs.map(doc => doc.data())
-    // });
+    this.db.collection("bookshelf").get().subscribe(querySnapshot => {
+      this.books = querySnapshot.docs.map(doc => doc.data());
+      this.filteredBooks = querySnapshot.docs.map(doc => doc.data());
+      this.authorArr = [...new Set(this.books.map(book => book.volumeInfo.authors[0]))]
+      console.log(this.authorArr);
+      
+    });
+  };
+    
+  handleFilter(filterText) {
+    if(!filterText) this.filteredBooks = this.books
+    else this.filteredBooks = this.books.filter(book => book.volumeInfo.authors[0] === filterText)
   }
+  
 }

@@ -1,4 +1,15 @@
-<app-booklist [books]="books">
+<section class="filter">
+  <select
+    [(ngModel)]="filterText"
+    (change)="handleFilter(filterText)"
+    class="filter__select"
+    placeholder="filter by author">
+    <option value="">Filter by Author...</option>
+    <option *ngFor="let author of authorArr">{{author}}</option>
+  </select>
+</section>
+
+<app-booklist [books]="filteredBooks">
   <h1>Your Favourites</h1>
-  <p>How can choose between these little gems?</p>
+  <p>Good luck choosing between these little gems...</p>
 </app-booklist>

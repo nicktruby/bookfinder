@@ -20,7 +20,7 @@ export class FindabookComponent implements OnInit {
   
   
   ngOnInit(): void {
-    // this.books = this.searchService.booksResult
+    
   }
 
   handleSearch(searchText) {

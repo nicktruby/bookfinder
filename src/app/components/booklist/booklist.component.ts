@@ -10,10 +10,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class BooklistComponent implements OnInit {
   
   @Input() books: object[];
-  
+
   constructor(private db : AngularFirestore) { }
 
   ngOnInit(): void {
+
   }
 
   handleSave = book => {
