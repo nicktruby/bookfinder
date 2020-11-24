@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-bookshelf',
-  templateUrl: './bookshelf.component.html',
-  styleUrls: ['./bookshelf.component.scss']
+  selector: 'app-favourites',
+  templateUrl: './favourites.component.html',
+  styleUrls: ['./favourites.component.scss']
 })
-export class BookshelfComponent implements OnInit {
+
+export class FavouritesComponent implements OnInit {
 
   books : any;
   authorArr : any[];
@@ -16,12 +17,10 @@ export class BookshelfComponent implements OnInit {
   constructor(private db : AngularFirestore) { }
 
   ngOnInit(): void {
-    this.db.collection("bookshelf").get().subscribe(querySnapshot => {
+    this.db.collection("favourites").get().subscribe(querySnapshot => {
       this.books = querySnapshot.docs.map(doc => doc.data());
       this.filteredBooks = querySnapshot.docs.map(doc => doc.data());
       this.authorArr = [...new Set(this.books.map(book => book.volumeInfo.authors[0]))]
-      console.log(this.authorArr);
-      
     });
   };
     

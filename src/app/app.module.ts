@@ -10,7 +10,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { BooklistComponent } from './components/booklist/booklist.component';
 // Pages
 import { FindabookComponent } from './pages/findabook/findabook.component';
-import { BookshelfComponent } from './pages/bookshelf/bookshelf.component';
+import { FavouritesComponent } from './pages/favourites/favourites.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -32,7 +32,7 @@ const firebaseConfig = {
     AppComponent,
     FindabookComponent,
     BooklistComponent,
-    BookshelfComponent,
+    FavouritesComponent,
     NavComponent,
     PageNotFoundComponent
   ],
@@ -41,7 +41,7 @@ const firebaseConfig = {
     BrowserModule,
     RouterModule.forRoot([
       {path: 'findabook', component: FindabookComponent},
-      {path: 'bookshelf', component: BookshelfComponent},
+      {path: 'favourites', component: FavouritesComponent},
       {path: '', redirectTo: '/findabook', pathMatch: 'full'},
       {path: '**', component: PageNotFoundComponent}
     ]),

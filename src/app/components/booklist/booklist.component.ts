@@ -18,6 +18,6 @@ export class BooklistComponent implements OnInit {
   }
 
   handleSave = book => {
-    this.db.doc(`bookshelf/${book.id}`).set(book, {merge:true})
+    this.db.doc(`favourites/${book.id}`).set(book, {merge:true})
   }
 }
