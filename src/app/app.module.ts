@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-//Components
+// Components
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { BooklistComponent } from './components/booklist/booklist.component';
@@ -38,7 +38,9 @@ const firebaseConfig = {
     PageNotFoundComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig), //init
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, //auth
     BrowserModule,
     RouterModule.forRoot([
       {path: 'findabook', component: FindabookComponent},

@@ -1,4 +1,19 @@
 <nav class="navbar">
-  <a class="btn-nav" routerLinkActive="activebutton" routerLink="/findabook">Find a Book</a>
-  <a class="btn-nav" routerLinkActive="activebutton" routerLink="/favourites">Favourites</a>
+  
+  <div class="links">
+    <button class="btn-nav" routerLinkActive="activebutton" routerLink="/findabook">Find a Book</button>
+    <button class="btn-nav" routerLinkActive="activebutton" routerLink="/favourites">Favourites</button>
+  </div>
+
+  <div *ngIf="auth.user$ | async as user; else login">
+    <button class="account" (click)="auth.signOut()">
+      <img src="{{user.photoURL}}" alt="">
+      {{user.displayName}}
+      <fa-icon [icon]="faSignOutAlt"></fa-icon>
+    </button>
+  </div>
+  
+  <ng-template #login>
+    <button class="account" (click)="auth.googleSignIn()">Sign in</button>
+  </ng-template>
 </nav>

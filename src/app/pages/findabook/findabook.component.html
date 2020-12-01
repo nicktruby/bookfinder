@@ -1,6 +1,8 @@
 <section class="search">
   <input [(ngModel)]="searchText" class="search__input" type="text" placeholder="search by name, author, etc.."/>
-  <button class="btn-search btn" (click)="handleSearch(searchText)"><fa-icon [icon]="faSearch"></fa-icon></button>
+  <button class="btn-search btn" (click)="handleSearch(searchText)">
+    <fa-icon [icon]="faSearch"></fa-icon>
+  </button>
 </section>
 
 <app-booklist [books]="books">
