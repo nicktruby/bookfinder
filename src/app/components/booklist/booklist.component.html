@@ -8,7 +8,7 @@
       <div class="book__details">
         <p>{{book.volumeInfo.authors[0] | slice:0:50}}</p>
         <h3>{{book.volumeInfo.title | slice:0:50}}</h3>
-        <button class="btn btn-secondary" (click)="handleSave(book)">Save</button>
+        <button class="btn btn-secondary" (click)="favs.addToFavourites(book)">Save</button>
       </div>
     </article>
   </div>

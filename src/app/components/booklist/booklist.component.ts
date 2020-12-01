@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../../services/auth.service';
+import { FavouritesService } from '../../services/favourites.service';
+
 
 @Component({
   selector: 'app-booklist',
@@ -11,13 +14,13 @@ export class BooklistComponent implements OnInit {
   
   @Input() books: object[];
 
-  constructor(private db : AngularFirestore) { }
+  constructor(private db : AngularFirestore, public auth: AuthService, public favs: FavouritesService) { 
+
+  }
+
 
   ngOnInit(): void {
 
   }
 
-  handleSave = book => {
-    this.db.doc(`favourites/${book.id}`).set(book, {merge:true})
-  }
 }

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthGuard } from './services/auth.guard';
 // Components
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -44,7 +45,7 @@ const firebaseConfig = {
     BrowserModule,
     RouterModule.forRoot([
       {path: 'findabook', component: FindabookComponent},
-      {path: 'favourites', component: FavouritesComponent},
+      {path: 'favourites', component: FavouritesComponent, canActivate: [AuthGuard]},
       {path: '', redirectTo: '/findabook', pathMatch: 'full'},
       {path: '**', component: PageNotFoundComponent}
     ]),
