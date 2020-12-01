@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface GoogleBooksResponse {
   items: any[];
@@ -13,6 +14,7 @@ interface GoogleBooksResponse {
 })
 export class FindabookComponent implements OnInit {
   
+  faSearch = faSearch;
   searchText: string;
   books: any[];
   

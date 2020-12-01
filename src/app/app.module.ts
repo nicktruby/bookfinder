@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //Components
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -45,6 +46,7 @@ const firebaseConfig = {
       {path: '', redirectTo: '/findabook', pathMatch: 'full'},
       {path: '**', component: PageNotFoundComponent}
     ]),
+    FontAwesomeModule,
     FormsModule,
     HttpClientModule,
     AngularFirestoreModule, // firestore
