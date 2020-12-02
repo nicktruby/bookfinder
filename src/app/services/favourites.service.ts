@@ -15,7 +15,7 @@ export class FavouritesService {
     // When the Favourites Service is created, get the favourites from firebase
     // and store them in this service.. so that any child component which has a "FavouritesService"
     // injected into it's constructor, can use the favourites we have :)
-    this.db.collection("favourites")
+    this.db.collection("users")
           .get()
           .subscribe(querySnapshot => {
             const favs = querySnapshot.docs.map(doc => doc.data());
