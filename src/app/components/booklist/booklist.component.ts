@@ -14,7 +14,7 @@ export class BooklistComponent implements OnInit {
   
   @Input() books: object[];
 
-  constructor(private db : AngularFirestore, public auth: AuthService, public favs: FavouritesService) { 
+  constructor(private db : AngularFirestore, public auth: AuthService, public favouriteSvc: FavouritesService) { 
 
   }
 

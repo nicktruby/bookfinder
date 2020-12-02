@@ -5,8 +5,8 @@ import firebase from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { User } from './user.model';
 
 @Injectable({
@@ -14,22 +14,30 @@ import { User } from './user.model';
 })
 export class AuthService {
 
-  user$: Observable<User>
+  // Used a behavior subject here instead of an observable so that not every component 
+  // has to subscribe/unsbuscribe to get a value
+  user$ = new BehaviorSubject(null); 
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
+    // 1. Listen for changes to the authstate (ie. is the user logged in or not)
+    this.afAuth.authState.subscribe((authUser: any) => {
+      if (authUser) {
+        // User is logged in! Let's get the userDoc from firestore and push/next it onto the user$ observable/behaviorsubject
+        this.afs.doc<User>(`users/${authUser.uid}`)
+                .get()
+                .toPromise()
+                .then(userDoc => {
+                  this.user$.next(userDoc.data());
+                });
+      } else {
+        // This user is NOT logged in. Push null to our user$ observable/behaviorsubject
+        this.user$.next(null);
+      }
+    })
   }
 
   async googleSignIn() {

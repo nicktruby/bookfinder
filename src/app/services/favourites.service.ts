@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 import { AuthService } from '../services/auth.service';
 
 
@@ -9,31 +10,30 @@ import { AuthService } from '../services/auth.service';
 })
 export class FavouritesService {
 
-  favourite$ = new BehaviorSubject([]);
+  constructor(private db : AngularFirestore, public auth: AuthService) { }
 
-  constructor(private db : AngularFirestore, public auth: AuthService) { 
-    // When the Favourites Service is created, get the favourites from firebase
-    // and store them in this service.. so that any child component which has a "FavouritesService"
-    // injected into it's constructor, can use the favourites we have :)
-    this.db.collection("users")
-          .get()
-          .subscribe(querySnapshot => {
-            const favs = querySnapshot.docs.map(doc => doc.data());
-            this.favourite$.next(favs);
-          })
+  
+
+  getFavourites() {
+    // Observable Approach which returns an observable/stream of data
+    const uid = this.auth.user$.value.uid;
+    return this.db.collection(`users/${uid}/favourites`).snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as any
+        data.id = a.payload.doc.id
+        return data
+      })
+    }))
   }
 
   addToFavourites(book) {
-    this.auth.user$.subscribe(user => {
-      this.db.doc(`users/${user.uid}/favourites/${book.id}`)
-            .set(book, {merge:true})
-    });
+    const user = this.auth.user$.value;
+    this.db.doc(`users/${user.uid}/favourites/${book.id}`).set(book, {merge:true})
   }
 
-  removeFromFavourites(favourite) {
+  removeFromFavourites(book) {
     // remove a favourite from firestore
-    
+    const user = this.auth.user$.value;
+    this.db.doc(`users/${user.uid}/favourites/${book.id}`).delete()
   }
-
-  
 }

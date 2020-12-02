@@ -6,9 +6,11 @@
     <article *ngFor="let book of books" class="book">
       <img src={{book.volumeInfo.imageLinks.smallThumbnail}} alt="book.volumeInfo.title">
       <div class="book__details">
-        <p>{{book.volumeInfo.authors[0] | slice:0:50}}</p>
+        <!-- <p>{{book.volumeInfo.authors[0] | slice:0:50}}</p> -->
+        <p>TESTING AUTHORS</p>
         <h3>{{book.volumeInfo.title | slice:0:50}}</h3>
-        <button class="btn btn-secondary" (click)="favs.addToFavourites(book)">Save</button>
+        <button class="btn btn-secondary" (click)="favouriteSvc.addToFavourites(book)">Save</button>
+        <button class="btn btn-secondary" (click)="favouriteSvc.removeFromFavourites(book)">Remove</button>
       </div>
     </article>
   </div>

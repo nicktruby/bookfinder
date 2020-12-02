@@ -9,7 +9,16 @@
   </select>
 </section>
 
-<app-booklist [books]="filteredBooks">
-  <h1>Your Favourites</h1>
-  <p>Good luck choosing between these little gems...</p>
-</app-booklist>
+<div *ngIf="filteredBooks?.length > 0;else noFavourites">
+  <app-booklist [books]="filteredBooks">
+    <h1>Your Favourites</h1>
+    <p>Good luck choosing between these little gems...</p>
+  </app-booklist>
+</div>
+
+<ng-template #noFavourites>
+  <app-booklist [books]="books">
+    <h1>No Favourites</h1>
+    <p>Search for some books add them to your favourites.</p>
+  </app-booklist>
+</ng-template>

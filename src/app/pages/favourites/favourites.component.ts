@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { FavouritesService } from '../../services/favourites.service';
 
 @Component({
   selector: 'app-favourites',
@@ -14,15 +17,25 @@ export class FavouritesComponent implements OnInit {
   filterText: string;
   filteredBooks : any;
 
-  constructor(private db : AngularFirestore) { }
+  booksStream$: Observable<any>;
+
+  constructor(private db : AngularFirestore, public favouritesSvc : FavouritesService, public authSvc: AuthService) { }
 
   ngOnInit(): void {
-    this.db.collection("favourites").get().subscribe(querySnapshot => {
-      this.books = querySnapshot.docs.map(doc => doc.data());
-      this.filteredBooks = querySnapshot.docs.map(doc => doc.data());
-      this.authorArr = [...new Set(this.books.map(book => book.volumeInfo.authors[0]))]
-    });
-  };
+    this.favouritesSvc.getFavourites().subscribe(favourites => {
+      this.books = favourites;
+      this.filteredBooks = favourites;
+      this.getAuthorsList()
+    })      
+  }
+  
+  getAuthorsList() {
+    this.authorArr = [...new Set(this.books.map(book => {
+      if(book.volumeInfo.authors[0]) {
+        return book.volumeInfo.authors[0]
+      }  
+    }))]
+  }
     
   handleFilter(filterText) {
     if(!filterText) this.filteredBooks = this.books
@@ -30,3 +43,4 @@ export class FavouritesComponent implements OnInit {
   }
   
 }
+  
