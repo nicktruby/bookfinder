@@ -20,7 +20,6 @@ export class BooklistComponent implements OnInit {
 
 
   ngOnInit(): void {
-
   }
 
 }

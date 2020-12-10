@@ -26,6 +26,8 @@ export class FavouritesComponent implements OnInit {
       this.books = favourites;
       this.filteredBooks = favourites;
       this.getAuthorsList()
+      console.log(this.books[0]);
+
     })      
   }
   
